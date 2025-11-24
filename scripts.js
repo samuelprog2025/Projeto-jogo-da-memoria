@@ -1,3 +1,4 @@
+ alert(" Esse game é criado por Samuel Dev");
 
 const GRID_SIZE = 16;
 const PAIR_COUNT = GRID_SIZE / 2;
