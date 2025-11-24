@@ -1,0 +1,181 @@
+
+:root {
+    --color-primary: #007bff;
+    --color-secondary: #343a40;
+    --color-background: #f8f9fa;
+    --color-light: #ffffff;
+    --color-success: #28a745; 
+    --card-size-desktop: 120px;
+    --card-size-mobile: 80px;
+    --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-secondary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.display,
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.amount {
+    background-color: var(--color-secondary);
+    color: var(--color-light);
+    flex-grow: 1;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow-subtle);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.button {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    font-size: 1em;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    flex-grow: 1;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-inset);
+}
+
+.grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, var(--card-size-desktop));
+    gap: 10px;
+    justify-content: center; 
+}
+
+.cards {
+    width: var(--card-size-desktop);
+    height: var(--card-size-desktop);
+    border: 1px solid var(--color-primary); 
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    perspective: 1000px;
+    user-select: none;
+    box-shadow: var(--shadow-subtle);
+    transition: box-shadow 0.3s;
+}
+
+.cards:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cardsInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+
+.cards.active .cardsInner {
+    transform: rotateY(180deg);
+}
+
+.cards.matched {
+    border-color: var(--color-success);
+    pointer-events: none; 
+    box-shadow: 0 0 10px var(--color-success);
+    opacity: 0.9;
+}
+
+.cardsFront,
+.cardsBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em; 
+    border-radius: 9px; 
+}
+
+.cardsBack {
+    background-color: var(--color-light);
+    color: var(--color-secondary);
+    transform: rotateY(180deg);
+}
+
+.cardsFront {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+
+
+@media (max-width: 580px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(4, var(--card-size-mobile));
+        gap: 6px;
+    }
+    
+    .cards {
+        width: var(--card-size-mobile);
+        height: var(--card-size-mobile);
+        border-radius: 8px;
+    }
+    
+    .cardsFront,
+    .cardsBack {
+        font-size: 2em; 
+    }
+
+    .amount, .button {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
